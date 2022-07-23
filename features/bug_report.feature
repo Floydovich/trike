@@ -9,15 +9,10 @@ Feature: Bug report
     Then the browser title is "trike"
     And there is "Bugs and features" heading on the page
 
-#  Scenario: Navigate to the new ticket report page
-#    Given the home page is opened
-#    When the user clicks the new ticket button
-#    Then the user navigates to the new ticket page
-#
-#  Scenario: Creating and submitting a new ticket
-#    Given the new ticket form is opened
-#    When the user writes the title
-#    And the user adds text to the form
-#    And the user clicks the submit button
-#    Then the user is redirected to the issues list
-#    And the user sees the ticket title in the list
+  Scenario: Creating and submitting a new ticket
+    Given the home page is opened
+    When I write the ticket title
+    And I add some text to the ticket description
+    And I click the submit button
+    Then the browser opens the home page again
+    And I see the ticket title in the list on page

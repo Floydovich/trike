@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'behave_django'
+    'behave_django',
+
+    'apps.tickets',
 ]
 
 MIDDLEWARE = [
