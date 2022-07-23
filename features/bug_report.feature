@@ -1,12 +1,12 @@
 Feature: Bug report
   As a developer,
-  I want to report about a bug,
-  So I can fix it later.
+  I want to be able create a bug report,
+  So I can save and fix it later.
 
   Scenario: Opening the home page
     Given the browser is opened
-    When the user moves to the home page
-    Then browser has "trike" in the title
+    When I move to the home page
+    Then the browser title is "trike"
     And there is "Issues" heading on the page
 
 #  Scenario: Navigate to the new ticket report page
