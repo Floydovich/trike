@@ -7,7 +7,7 @@ Feature: Bug report
     Given the browser is opened
     When I move to the home page
     Then the browser title is "trike"
-    And there is "Issues" heading on the page
+    And there is "Bugs and features" heading on the page
 
 #  Scenario: Navigate to the new ticket report page
 #    Given the home page is opened

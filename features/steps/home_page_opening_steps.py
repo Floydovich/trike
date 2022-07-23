@@ -19,7 +19,7 @@ def step_impl(context):
     assert 'trike' in context.browser.title
 
 
-@then('there is "Issues" heading on the page')
+@then('there is "Bugs and features" heading on the page')
 def step_impl(context):
     heading = context.browser.find_element(By.TAG_NAME, 'h1')
 
