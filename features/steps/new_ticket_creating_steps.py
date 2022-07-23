@@ -23,7 +23,7 @@ def step_impl(context):
 def step_impl(context):
     heading = context.browser.find_element(By.TAG_NAME, 'h1')
 
-    context.test.assertEquals('Bugs and features', heading)
+    context.test.assertEquals('Bugs and features', heading.text)
 
 
 @given("the home page is opened")
