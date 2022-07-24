@@ -24,9 +24,11 @@
 {% endif %}
 
 <table id="id_tickets_table">
-    <tr>
-        <td>{{ new_ticket_title }}</td>
-    </tr>
+    {% for ticket in tickets %}
+        <tr>
+            <td>{{ ticket.title }}</td>
+        </tr>
+    {% endfor %}
 </table>
 
 </body>

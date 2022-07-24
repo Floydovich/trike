@@ -1,5 +1,6 @@
 from behave import *
 
+from apps.tickets.models import Ticket
 from features.steps.helpers import *
 
 use_step_matcher("re")
@@ -41,10 +42,9 @@ def step_impl(context):
 
 @given("the home page has one submitted ticket")
 def step_impl(context):
-    add_title_description_and_submit(
-        context,
-        'Cannot create a ticket',
-        """
+    Ticket.objects.create(
+        title='Cannot create a ticket',
+        description="""
         There is no way to create a bug report ticket. The app is
         still very raw and has no basic functionality at all.
         """

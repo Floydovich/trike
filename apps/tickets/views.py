@@ -1,10 +1,14 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from apps.tickets.models import Ticket
 
 
 def home_page(request):
     if request.method == 'POST':
-        return render(request, 'home.html', {
-            'new_ticket_title': request.POST.get('ticket_title', ''),
-        })
-    return render(request, 'home.html')
+        Ticket.objects.create(title=request.POST['ticket_title'],
+                              description=request.POST['ticket_description'])
+        return redirect('/')
+
+    tickets = Ticket.objects.all()
+
+    return render(request, 'home.html', {'tickets': tickets})
