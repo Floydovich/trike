@@ -9,9 +9,16 @@ Feature: Bug report
     Then the browser title is "trike"
     And the page heading says "No reported bugs"
 
-  Scenario: Creating and submitting a new ticket
+  Scenario: Creating and submitting a new bug reporting ticket
     Given the home page is opened
     When I write the ticket title "Cannot create a ticket"
     And I add some text to the ticket description and submit
-    Then the page heading now says "Reported bugs: 1"
-    And the first ticket in the list has title "Cannot create a ticket"
+    Then the first ticket in the list says "Cannot create a ticket"
+    And the page heading now says "Reported bugs: 1"
+
+  Scenario: Adding one more bug reporting ticket
+    Given the home page has one submitted ticket
+    When I submit a new ticket with title and description
+    Then the second ticket title is shown on the page
+    And the first ticket is still there
+    And the page heading now says "Reported bugs: 2"
