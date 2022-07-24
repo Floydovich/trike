@@ -19,8 +19,8 @@ def step_impl(context):
     context.test.assertEquals('trike', context.browser.title)
 
 
-@then('the page heading says "No reported bugs"')
+@then('the page heading says "List of bugs"')
 def step_impl(context):
     heading = context.browser.find_element(By.TAG_NAME, 'h1')
 
-    context.test.assertEquals('No reported bugs', heading.text)
+    context.test.assertEquals('List of bugs', heading.text)

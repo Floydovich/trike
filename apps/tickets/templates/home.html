@@ -17,16 +17,12 @@
     {% csrf_token %}
 </form>
 
-{% if new_ticket_title %}
-    <h1>Reported bugs: 1</h1>
-{% else %}
-    <h1>No reported bugs</h1>
-{% endif %}
+<h1>List of bugs</h1>
 
 <table id="id_tickets_table">
     {% for ticket in tickets %}
         <tr>
-            <td>{{ ticket.title }}</td>
+            <td><a>{{ ticket.title }}</a></td>
         </tr>
     {% endfor %}
 </table>

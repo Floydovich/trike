@@ -1,4 +1,4 @@
-Feature: Bug report
+Feature: Creating a bug ticket
   As a developer,
   I want to be able create a bug report,
   So I can save it and fix the bug later.
@@ -7,7 +7,7 @@ Feature: Bug report
     Given the browser is opened
     When I move to the home page
     Then the browser title is "trike"
-    And the page heading says "No reported bugs"
+    And the page heading says "List of bugs"
 
   Scenario: Submitting a new bug reporting ticket
     Given the home page is opened
