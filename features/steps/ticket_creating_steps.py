@@ -53,7 +53,6 @@ def step_impl(context):
 
 @when("I submit a new ticket with title and description")
 def step_impl(context):
-    # TODO: Fixture form sending for reusing
     add_title_description_and_submit(
         context,
         'List shows only one ticket',
