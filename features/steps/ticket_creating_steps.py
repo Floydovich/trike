@@ -8,7 +8,7 @@ use_step_matcher("re")
 
 @given("the home page is opened")
 def step_impl(context):
-    context.browser.get('http://localhost:8000')
+    context.browser.get(context.base_url)
 
 
 @when('I write the ticket title "Cannot create a ticket"')
@@ -42,6 +42,8 @@ def step_impl(context):
 
 @given("the home page has one submitted ticket")
 def step_impl(context):
+    context.browser.get(context.base_url)
+
     Ticket.objects.create(
         title='Cannot create a ticket',
         description="""

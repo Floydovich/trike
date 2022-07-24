@@ -11,7 +11,7 @@ def step_impl(context):
 
 @when("I move to the home page")
 def step_impl(context):
-    context.browser.get('http://localhost:8000')
+    context.browser.get(context.base_url)
 
 
 @then('the browser title is "trike"')

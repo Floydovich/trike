@@ -16,7 +16,7 @@ Feature: Bug report
     Then the first ticket in the list says "Cannot create a ticket"
 
   Scenario: Adding one more bug reporting ticket
-  This is needed for so-called test triangulation which ensures that page will
+  This is needed for test triangulation which ensures that page will
   have all the tickets the users submit
     Given the home page has one submitted ticket
     When I submit a new ticket with title and description
