@@ -30,14 +30,7 @@ def step_impl(context):
 
 @then('the first ticket in the list says "Cannot create a ticket"')
 def step_impl(context):
-    check_for_row_in_tickets_table(context, 'Cannot create a ticket')
-
-
-@then('the page heading now says "Reported bugs: 1"')
-def step_impl(context):
-    heading = context.browser.find_element(By.TAG_NAME, 'h1')
-
-    context.test.assertEquals('Reported bugs: 1', heading.text)
+    wait_for_row_in_tickets_table(context, 'Cannot create a ticket')
 
 
 @given("the home page has one submitted ticket")
@@ -67,16 +60,9 @@ def step_impl(context):
 
 @then("the second ticket title is shown on the page")
 def step_impl(context):
-    check_for_row_in_tickets_table(context, 'List shows only one ticket')
+    wait_for_row_in_tickets_table(context, 'List shows only one ticket')
 
 
 @then("the first ticket is still there")
 def step_impl(context):
-    check_for_row_in_tickets_table(context, 'Cannot create a ticket')
-
-
-@then('the page heading now says "Reported bugs: 2"')
-def step_impl(context):
-    heading = context.browser.find_element(By.TAG_NAME, 'h1')
-
-    context.test.assertEquals('Reported bugs: 2', heading.text)
+    wait_for_row_in_tickets_table(context, 'Cannot create a ticket')

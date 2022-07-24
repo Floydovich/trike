@@ -6,5 +6,4 @@ def before_all(context):
 
 
 def after_all(context):
-    pass
     context.browser.quit()
