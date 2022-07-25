@@ -1,9 +1,6 @@
 from selenium import webdriver
 
 
-from apps.tickets.models import Ticket
-
-
 def before_all(context):
     context.browser = webdriver.Firefox()
 

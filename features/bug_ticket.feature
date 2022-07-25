@@ -11,8 +11,7 @@ Feature: Creating a bug ticket
 
   Scenario: Submitting a new bug reporting ticket
     Given the home page is opened
-    When I write the ticket title "Cannot create a ticket"
-    And I add some text to the ticket description and submit
+    When I enter title, description and submit
     Then the first ticket in the list says "Cannot create a ticket"
 
   Scenario: Adding one more bug reporting ticket

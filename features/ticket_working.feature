@@ -5,16 +5,17 @@ Feature: Working on a bug ticket
   So I can start working to fix it
 
   Scenario Outline: Selecting a ticket from the list
-    Given there are tickets in the list on the home page
+    Given the list contains two created tickets
       | title                      | description                   |
       | Can't open ticket detail   | Bug description               |
       | Can't edit the description | Outdated ticket's description |
-    When I click on the ticket called <title>
+
+    When I click on the ticket with the title <title>
     Then the browser opens the ticket <id> detail page
     And the page contains the title <title>
     And the page contains the description <description>
 
     Examples:
-      |id | title                      | description                   |
-      | 1 | Can't open ticket detail   | Bug description               |
-      | 4 | Can't edit the description | Outdated ticket's description |
+      | id | title                      | description                   |
+      | 1  | Can't open ticket detail   | Bug description               |
+      | 4  | Can't edit the description | Outdated ticket's description |

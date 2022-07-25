@@ -11,12 +11,7 @@ def step_impl(context):
     context.browser.get(context.base_url)
 
 
-@when('I write the ticket title "Cannot create a ticket"')
-def step_impl(context):
-    pass
-
-
-@when("I add some text to the ticket description and submit")
+@when("I enter title, description and submit")
 def step_impl(context):
     add_title_description_and_submit(
         context,

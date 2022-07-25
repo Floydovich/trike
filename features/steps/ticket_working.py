@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from apps.tickets.models import Ticket
 
 
-@given("there are tickets in the list on the home page")
+@given("the list contains two created tickets")
 def step_impl(context):
     for row in context.table:
         Ticket.objects.create(title=row['title'],
@@ -13,7 +13,7 @@ def step_impl(context):
     context.browser.get(context.base_url)
 
 
-@when("I click on the ticket called {title}")
+@when("I click on the ticket with the title {title}")
 def step_impl(context, title):
     ticket_title = context.browser.find_element(By.LINK_TEXT, title)
     ticket_title.click()
