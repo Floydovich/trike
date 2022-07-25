@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 
 from apps.tickets.models import Ticket
 
@@ -44,6 +45,26 @@ class HomePage(TestCase):
 
         self.assertIn('title 1', response.content.decode())
         self.assertIn('title 2', response.content.decode())
+
+
+class TicketDetailsTest(TestCase):
+
+    def test_details_view_returns_correct_template(self):
+        ticket = Ticket.objects.create(title='Ticket title',
+                                       description='Ticket description')
+
+        response = self.client.get(reverse('ticket_details', args=[ticket.id]))
+
+        self.assertTemplateUsed(response, 'ticket_details.html')
+
+    def test_displays_title_and_description(self):
+        ticket = Ticket.objects.create(title='Ticket title',
+                                       description='Ticket description')
+
+        response = self.client.get(reverse('ticket_details', args=[ticket.id]))
+
+        self.assertIn(ticket.title, response.content.decode())
+        self.assertIn(ticket.description, response.content.decode())
 
 
 class TicketModelTest(TestCase):

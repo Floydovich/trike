@@ -1,7 +1,9 @@
 from selenium import webdriver
 
 
-# noinspection PyTypeHints
+from apps.tickets.models import Ticket
+
+
 def before_all(context):
     context.browser = webdriver.Firefox()
 

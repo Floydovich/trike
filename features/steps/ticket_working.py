@@ -4,10 +4,12 @@ from selenium.webdriver.common.by import By
 from apps.tickets.models import Ticket
 
 
-@given("there are two tickets in the list on the home page")
+@given("there are tickets in the list on the home page")
 def step_impl(context):
-    Ticket.objects.create(title='Title 1', description='Description 1')
-    Ticket.objects.create(title='Title 2', description='Description 2')
+    for row in context.table:
+        Ticket.objects.create(title=row['title'],
+                              description=row['description'])
+
     context.browser.get(context.base_url)
 
 
@@ -17,7 +19,7 @@ def step_impl(context, title):
     ticket_title.click()
 
 
-@then("the browser opens the ticket's detail page {id}")
+@then("the browser opens the ticket {id} detail page")
 def step_impl(context, id):
     context.test.assertIn(f'tickets/{id}', context.browser.current_url)
 

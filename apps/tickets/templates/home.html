@@ -22,7 +22,7 @@
 <table id="id_tickets_table">
     {% for ticket in tickets %}
         <tr>
-            <td><a>{{ ticket.title }}</a></td>
+            <td><a href="{% url 'ticket_details' ticket.id %}">{{ ticket.title }}</a></td>
         </tr>
     {% endfor %}
 </table>

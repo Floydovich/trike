@@ -12,3 +12,9 @@ def home_page(request):
     tickets = Ticket.objects.all()
 
     return render(request, 'home.html', {'tickets': tickets})
+
+
+def ticket_details(request, id):
+    ticket = Ticket.objects.get(id=id)
+
+    return render(request, 'ticket_details.html', {'ticket': ticket})
