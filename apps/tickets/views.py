@@ -33,3 +33,7 @@ def ticket_status(request, id):
     ticket.save()
 
     return redirect(reverse('ticket_detail', args=[id]))
+
+
+def new_ticket(request):
+    return render(request, 'new_ticket.html')

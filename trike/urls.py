@@ -22,6 +22,7 @@ from apps.tickets import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_page, name='home'),
+    path('new-ticket', views.new_ticket, name='new-ticket'),
     path('tickets/<int:id>', views.ticket_detail, name='ticket_detail'),
     path('tickets/<int:id>/status', views.ticket_status, name='ticket_status')
 ]

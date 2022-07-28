@@ -4,6 +4,7 @@ Feature: Creating a bug ticket
   I want to be able create a bug report,
   So I can save it and fix the bug later.
 
+  # TODO: Move this scenario to another feature
   Scenario: Opening the home page
     Given the browser is opened
     When I move to the home page
@@ -48,3 +49,15 @@ Feature: Creating a bug ticket
     And I press the submit button
     Then List shows only one ticket. is displayed in the list
     And the previously created ticket is still in the list
+
+  Scenario Outline: Selection the ticket type
+    Given the new ticket page is opened
+    When I select to create a <ticket_type>
+    And I press the submit button
+    Then the ticket detail page is opened
+    And the ticket type is <ticket_type>
+
+    Examples:
+    | ticket_type |
+    | bug         |
+    | feature     |
