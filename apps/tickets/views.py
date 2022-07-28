@@ -1,4 +1,6 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse
 
 from apps.tickets.models import Ticket
 
@@ -18,3 +20,16 @@ def ticket_details(request, id):
     ticket = Ticket.objects.get(id=id)
 
     return render(request, 'ticket_details.html', {'ticket': ticket})
+
+
+def ticket_status(request, id):
+    ticket = Ticket.objects.get(id=id)
+    status = request.POST['status']
+
+    if status not in Ticket.Status.values:
+        return HttpResponse(status=404)
+
+    ticket.status = status
+    ticket.save()
+
+    return HttpResponse()
