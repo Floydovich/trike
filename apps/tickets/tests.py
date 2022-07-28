@@ -63,16 +63,16 @@ class TicketDetailsTest(TestCase):
             description='Ticket description',
         )
 
-    def test_details_view_returns_correct_template(self):
+    def test_returns_correct_template(self):
         response = self.client.get(
-            reverse('ticket_details', args=[self.ticket.id])
+            reverse('ticket_detail', args=[self.ticket.id])
         )
 
-        self.assertTemplateUsed(response, 'ticket_details.html')
+        self.assertTemplateUsed(response, 'ticket_detail.html')
 
     def test_displays_title_and_description(self):
         response = self.client.get(
-            reverse('ticket_details', args=[self.ticket.id])
+            reverse('ticket_detail', args=[self.ticket.id])
         )
 
         self.assertIn(self.ticket.title, response.content.decode())
@@ -80,7 +80,7 @@ class TicketDetailsTest(TestCase):
 
     def test_display_status(self):
         response = self.client.get(
-            reverse('ticket_details', args=[self.ticket.id])
+            reverse('ticket_detail', args=[self.ticket.id])
         )
 
         self.assertIn(self.ticket.status, response.content.decode())
@@ -90,7 +90,7 @@ class TicketDetailsTest(TestCase):
         self.ticket.save()
 
         response = self.client.get(
-            reverse('ticket_details', args=[self.ticket.id])
+            reverse('ticket_detail', args=[self.ticket.id])
         )
 
         self.assertIn(self.ticket.status, response.content.decode())
@@ -120,6 +120,15 @@ class TicketDetailsTest(TestCase):
         self.ticket.refresh_from_db()
         self.assertEqual(expected_status, self.ticket.status)
         self.assertEqual(404, response.status_code)
+
+    def test_redirect_to_detail_after_status_POST(self):
+        response = self.client.post(
+            reverse('ticket_status', args=[self.ticket.id]),
+            data={'status': 'DONE'}
+        )
+
+        self.assertEqual(302, response.status_code)
+        self.assertEqual(f'/tickets/{self.ticket.id}', response['location'])
 
 
 class TicketModelTest(TestCase):

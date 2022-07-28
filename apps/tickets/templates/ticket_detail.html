@@ -1,0 +1,25 @@
+<html lang="en">
+
+<head>
+    <title>trike</title>
+</head>
+
+<body>
+
+    <h1>{{ ticket.title }}</h1>
+
+    <p>{{ ticket.description }}</p>
+
+    <p id="status">{{ ticket.status }}</p>
+
+    <form action="{% url 'ticket_status' ticket.id %}" method="post">
+        <button id="PENDING" name="status" type="submit" value="PENDING">PENDING</button>
+        <button id="IN REVIEW" name="status" type="submit" value="IN REVIEW">IN REVIEW</button>
+        <button id="DONE" name="status" type="submit" value="DONE">DONE</button>
+
+        {% csrf_token %}
+    </form>
+
+</body>
+
+</html>

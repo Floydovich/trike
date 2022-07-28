@@ -16,10 +16,10 @@ def home_page(request):
     return render(request, 'home.html', {'tickets': tickets})
 
 
-def ticket_details(request, id):
+def ticket_detail(request, id):
     ticket = Ticket.objects.get(id=id)
 
-    return render(request, 'ticket_details.html', {'ticket': ticket})
+    return render(request, 'ticket_detail.html', {'ticket': ticket})
 
 
 def ticket_status(request, id):
@@ -32,4 +32,4 @@ def ticket_status(request, id):
     ticket.status = status
     ticket.save()
 
-    return HttpResponse()
+    return redirect(reverse('ticket_detail', args=[id]))
