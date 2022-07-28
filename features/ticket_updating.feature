@@ -4,18 +4,14 @@ Feature: Working on a bug ticket
   I want to read about a bug
   So I can start working to fix it
 
-  Scenario Outline: Selecting a ticket from the list
-    Given the list contains two created tickets
-      | title                      | description                   |
-      | Can't open ticket detail   | Bug description               |
-      | Can't edit the description | Outdated ticket's description |
-
-    When I click on the ticket with the title <title>
-    Then the browser opens the ticket <id> detail page
-    And the page contains the title <title>
-    And the page contains the description <description>
+  Scenario Outline: Changing the ticket status
+    Given the ticket detail page is opened
+    And the ticket status is PENDING
+    When I mark the ticket as <status>
+    Then the ticket status is changed to <status>
 
     Examples:
-      | id | title                      | description                   |
-      | 1  | Can't open ticket detail   | Bug description               |
-      | 4  | Can't edit the description | Outdated ticket's description |
+      | status    |
+      | PENDING   |
+      | IN REVIEW |
+      | DONE      |
