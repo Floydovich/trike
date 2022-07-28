@@ -1,9 +1,8 @@
 from behave import *
+from selenium.webdriver import Keys
 
 from apps.tickets.models import Ticket
 from features.steps.helpers import *
-
-use_step_matcher("re")
 
 
 @given("the home page is opened")
@@ -11,53 +10,37 @@ def step_impl(context):
     context.browser.get(context.base_url)
 
 
-@when("I enter title, description and submit")
+@when("I enter the title {title}")
+def step_impl(context, title):
+    title_inputbox = context.browser.find_element(By.NAME, 'ticket_title')
+    title_inputbox.send_keys(title)
+
+
+@step("I enter the description")
 def step_impl(context):
-    add_title_description_and_submit(
-        context,
-        'Cannot create a ticket',
-        """
-        There is no way to create a bug report ticket. The app is
-        still very raw and has no basic functionality at all.
-        """
-    )
+    desc_inputbox = context.browser.find_element(By.NAME, 'ticket_description')
+    desc_inputbox.send_keys(context.text)
 
 
-@then('the first ticket in the list says "Cannot create a ticket"')
+@step("I press the submit button")
 def step_impl(context):
-    wait_for_row_in_tickets_table(context, 'Cannot create a ticket')
+    button = context.browser.find_element(By.NAME, 'Submit')
+    button.send_keys(Keys.ENTER)
 
 
-@given("the home page has one submitted ticket")
+@then("{title} is displayed in the list")
+def step_impl(context, title):
+    wait_for_row_in_tickets_table(context, title)
+
+
+@given("the page has submitted ticket")
 def step_impl(context):
     context.browser.get(context.base_url)
-
-    Ticket.objects.create(
-        title='Cannot create a ticket',
-        description="""
-        There is no way to create a bug report ticket. The app is
-        still very raw and has no basic functionality at all.
-        """
+    context.old_ticket = Ticket.objects.create(
+        title='previous ticket', description='some description'
     )
 
 
-@when("I submit a new ticket with title and description")
+@then("the previously created ticket is still in the list")
 def step_impl(context):
-    add_title_description_and_submit(
-        context,
-        'List shows only one ticket',
-        """
-        When I create more than one ticket the page doesn't show all tickets. It
-        Only shows the first one.
-        """
-    )
-
-
-@then("the second ticket title is shown on the page")
-def step_impl(context):
-    wait_for_row_in_tickets_table(context, 'List shows only one ticket')
-
-
-@then("the first ticket is still there")
-def step_impl(context):
-    wait_for_row_in_tickets_table(context, 'Cannot create a ticket')
+    wait_for_row_in_tickets_table(context, context.old_ticket.title)

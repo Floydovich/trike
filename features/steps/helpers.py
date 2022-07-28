@@ -19,13 +19,3 @@ def wait_for_row_in_tickets_table(context, row_text):
             if time.time() - start_time > MAX_TIME:
                 raise e
             time.sleep(0.5)
-
-
-def add_title_description_and_submit(context, title, description):
-    title_inputbox = context.browser.find_element(By.NAME, 'ticket_title')
-    title_inputbox.send_keys(title)
-
-    desc_inputbox = context.browser.find_element(By.NAME, 'ticket_description')
-    desc_inputbox.send_keys(description)
-
-    desc_inputbox.submit()
