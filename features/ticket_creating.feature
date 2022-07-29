@@ -5,11 +5,11 @@ Feature: Creating a bug ticket
   So I can save it and fix the bug later.
 
   Scenario Outline: Submitting a new ticket
-    Given the new ticket page is opened
+    Given the new ticket form is opened
     When I select the kind <kind>
     And I enter the title <title>
     And I submit the ticket
-    Then the home page is opened
+    Then the ticket list on home page is opened
     And the list displays the kind <kind>
     And the list displays the title <title>
 
@@ -19,10 +19,14 @@ Feature: Creating a bug ticket
     | Feature | I want to be able to select a ticket kind. |
 
   Scenario: Adding one more ticket
-    Given the new ticket page is opened
-    And the page has submitted ticket
+    Given there are tickets submitted earlier
+    | kind    | title                       |
+    | Bug     | I need more tickets!        |
+    | Feature | I need even more tickets!!! |
+
+    And the new ticket form is opened
     When I enter the title List shows only one ticket.
     And I submit the ticket
-    Then the home page is opened
+    Then the ticket list on home page is opened
     And the list displays the title List shows only one ticket.
-    And the previously created ticket is still in the list
+    And the earlier tickets are still in the list

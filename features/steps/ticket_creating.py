@@ -8,7 +8,7 @@ from features.steps.helpers import *
 
 # Scenario: Submitting a new ticket
 
-@given("the new ticket page is opened")
+@given("the new ticket form is opened")
 def step_impl(context):
     context.browser.get(f'{context.base_url}/new-ticket')
 
@@ -32,7 +32,7 @@ def step_impl(context):
     time.sleep(1)
 
 
-@then("the home page is opened")
+@then("the ticket list on home page is opened")
 def step_impl(context):
     context.test.assertEqual(context.base_url + '/', context.browser.current_url)
 
@@ -49,15 +49,18 @@ def step_impl(context, title):
 
 # Scenario: Adding one more ticket
 
-@given("the page has submitted ticket")
+@given("there are tickets submitted earlier")
 def step_impl(context):
-    context.old_ticket = Ticket.objects.create(
-        title='previous ticket',
-        description='some description',
-        kind='Feature'
-    )
+    context.earlier_tickets = []
+    for row in context.table:
+        ticket = Ticket.objects.create(
+            kind=row['kind'],
+            title=row['title'],
+        )
+        context.earlier_tickets.append(ticket)
 
 
-@then("the previously created ticket is still in the list")
+@then("the earlier tickets are still in the list")
 def step_impl(context):
-    wait_for_cell_in_tickets_table(context, context.old_ticket.title)
+    for ticket in context.earlier_tickets:
+        wait_for_cell_in_tickets_table(context, ticket.title)
