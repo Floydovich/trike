@@ -31,4 +31,5 @@ def step_impl(context):
 
 @step("the ticket type is {ticket_type}")
 def step_impl(context, ticket_type):
-    raise NotImplementedError(u'STEP: And the ticket type is <type>')
+    typebox = context.browser.find_element(By.ID, 'id_typebox')
+    context.test.assertEqual(ticket_type, typebox.text)

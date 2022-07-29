@@ -6,24 +6,18 @@
 
 <body>
 
-<form method="POST">
-    <label>
-        <input name="ticket_title">
-        <textarea name="ticket_description"></textarea>
-    </label>
-
-    <input type="submit" name="Submit">
-
-    {% csrf_token %}
-</form>
-
-<h1>List of bugs</h1>
+<h1>List of bugs and features</h1>
 
 <table id="id_tickets_table">
     {% for ticket in tickets %}
         <tr>
+            <td id="id_typebox">
+                {{ ticket.type }}
+            </td>
             <td>
-                <a href="{% url 'ticket_detail' ticket.id %}">{{ ticket.title }}</a>
+                <a href="{% url 'ticket_detail' ticket.id %}">
+                    {{ ticket.title }}
+                </a>
             </td>
         </tr>
     {% endfor %}

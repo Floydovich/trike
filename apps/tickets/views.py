@@ -6,11 +6,6 @@ from apps.tickets.models import Ticket
 
 
 def home_page(request):
-    if request.method == 'POST':
-        Ticket.objects.create(title=request.POST['ticket_title'],
-                              description=request.POST['ticket_description'])
-        return redirect('/')
-
     tickets = Ticket.objects.all()
 
     return render(request, 'home.html', {'tickets': tickets})
@@ -37,8 +32,12 @@ def ticket_status(request, id):
 
 def new_ticket(request):
     if request.method == 'POST':
+        # TODO: Rename title and description without ticket
+        Ticket.objects.create(title=request.POST['ticket_title'],
+                              description=request.POST['ticket_description'],
+                              kind=request.POST['kind'])
         return redirect('/')
 
-    ticket_types = Ticket.Type.values
+    ticket_types = Ticket.Kind.values
 
     return render(request, 'new_ticket.html', {'ticket_types': ticket_types})

@@ -2,9 +2,16 @@ from django.db import models
 
 
 class Ticket(models.Model):
-    class Type(models.TextChoices):
+
+    class Kind(models.TextChoices):
         BUG = 'Bug'
         FEATURE = 'Feature'
+
+    kind = models.CharField(
+        max_length=10,
+        choices=Kind.choices,
+        default='',
+    )
 
     title = models.CharField(max_length=100, default='')
     description = models.TextField(default='')

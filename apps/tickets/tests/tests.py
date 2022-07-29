@@ -13,16 +13,6 @@ class HomePage(TestCase):
         # It only works when response is the first.
         self.assertTemplateUsed(response, 'home.html')
 
-    def test_can_save_a_POST_request(self):
-        self.client.post('/', data={
-            'ticket_title': 'Title for a new ticket',
-            'ticket_description': 'Description for a new ticket',
-        })
-
-        self.assertEqual(1, Ticket.objects.count())
-        new_ticket = Ticket.objects.first()
-        self.assertEqual('Title for a new ticket', new_ticket.title)
-
     def test_redirects_after_POST(self):
         response = self.client.post('/', data={
             'ticket_title': 'Title for a new ticket',
