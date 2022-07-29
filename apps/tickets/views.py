@@ -32,12 +32,11 @@ def ticket_status(request, id):
 
 def new_ticket(request):
     if request.method == 'POST':
-        # TODO: Rename title and description without ticket
-        Ticket.objects.create(title=request.POST['ticket_title'],
-                              description=request.POST['ticket_description'],
+        Ticket.objects.create(title=request.POST['title'],
+                              description=request.POST['description'],
                               kind=request.POST['kind'])
         return redirect('/')
 
-    ticket_types = Ticket.Kind.values
+    kinds = Ticket.Kind.values
 
-    return render(request, 'new_ticket.html', {'ticket_types': ticket_types})
+    return render(request, 'new_ticket.html', {'kinds': kinds})

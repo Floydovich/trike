@@ -4,38 +4,25 @@ Feature: Creating a bug ticket
   I want to be able create a bug report,
   So I can save it and fix the bug later.
 
-  Scenario: Submitting a new ticket
-    Given the home page is opened
-    When I enter the title Cannot create a ticket.
-    And I enter the description
-      """
-      There is no way to create a bug report ticket. The app is
-      still very raw and has no basic functionality at all.
-      """
-    And I press the submit button
-    Then Cannot create a ticket. is displayed in the list
-
-  Scenario: Adding one more ticket
-    Given the page has submitted ticket
-    When I enter the title List shows only one ticket.
-    And I enter the description
-        """
-        When I create more than one ticket the page doesn't show all tickets.
-        It only shows the first one.
-        """
-    And I press the submit button
-    Then List shows only one ticket. is displayed in the list
-    And the previously created ticket is still in the list
-
-  Scenario Outline: Selecting the kind of a ticket
+  Scenario Outline: Submitting a new ticket
     Given the new ticket page is opened
-    When I select the ticket kind <kind>
-    And I enter the title Cannot select the ticket kind.
+    When I select the kind <kind>
+    And I enter the title <title>
     And I submit the ticket
     Then the home page is opened
-    And the ticket kind is <kind>
+    And the list displays the kind <kind>
+    And the list displays the title <title>
 
     Examples:
-    | kind    |
-    | Bug     |
-    | Feature |
+    | kind    | title                                      |
+    | Bug     | I cannot create a new ticket. Help please. |
+    | Feature | I want to be able to select a ticket kind. |
+
+  Scenario: Adding one more ticket
+    Given the new ticket page is opened
+    And the page has submitted ticket
+    When I enter the title List shows only one ticket.
+    And I submit the ticket
+    Then the home page is opened
+    And the list displays the title List shows only one ticket.
+    And the previously created ticket is still in the list

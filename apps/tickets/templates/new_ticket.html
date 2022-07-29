@@ -5,13 +5,13 @@
 <form action="{% url 'new-ticket' %}" method="post">
     <label>
         <select id="id_select" name="kind">
-            {% for ticket_type in ticket_types %}
-                <option>{{ ticket_type }}</option>
+            {% for kind in kinds %}
+                <option>{{ kind }}</option>
             {% endfor %}
         </select>
 
-        <input name="ticket_title">
-        <textarea name="ticket_description"></textarea>
+        <input name="title">
+        <textarea name="description"></textarea>
 
         <input type="submit" name="Submit">
     </label>
