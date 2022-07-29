@@ -13,28 +13,29 @@ class HomePage(TestCase):
         # It only works when response is the first.
         self.assertTemplateUsed(response, 'home.html')
 
-    def test_redirects_after_POST(self):
-        response = self.client.post('/', data={
-            'ticket_title': 'Title for a new ticket',
-            'ticket_description': 'Description for a new ticket',
-        })
+    def test_displays_ticket_info(self):
+        tickets = [
+            {
+                'title': 'title 1',
+                'kind': 'Bug',
+            },
+            {
+                'title': 'title 2',
+                'kind': 'Feature',
+            },
+        ]
 
-        self.assertEqual(302, response.status_code)
-        self.assertEqual('/', response['location'])
-
-    def test_only_saves_tickets_when_necessary(self):
-        self.client.get('/')
-
-        self.assertEqual(0, Ticket.objects.count())
-
-    def test_displays_all_saved_tickets(self):
-        Ticket.objects.create(title='title 1', description='description 1')
-        Ticket.objects.create(title='title 2', description='description 2')
+        for ticket in tickets:
+            Ticket.objects.create(
+                title=ticket['title'],
+                kind=ticket['kind'],
+            )
 
         response = self.client.get('/')
 
-        self.assertIn('title 1', response.content.decode())
-        self.assertIn('title 2', response.content.decode())
+        for ticket in tickets:
+            for value in ticket.values():
+                self.assertIn(value, response.content.decode())
 
 
 class TicketDetailsTest(TestCase):
@@ -51,6 +52,7 @@ class TicketDetailsTest(TestCase):
         self.ticket = Ticket.objects.create(
             title='Ticket title',
             description='Ticket description',
+            kind='Bug'
         )
 
     def test_returns_correct_template(self):
@@ -68,22 +70,19 @@ class TicketDetailsTest(TestCase):
         self.assertIn(self.ticket.title, response.content.decode())
         self.assertIn(self.ticket.description, response.content.decode())
 
-    def test_display_status(self):
+    def test_displays_status(self):
         response = self.client.get(
             reverse('ticket_detail', args=[self.ticket.id])
         )
 
         self.assertIn(self.ticket.status, response.content.decode())
 
-        # Triangulation
-        self.ticket.status = Ticket.Status.DONE
-        self.ticket.save()
-
+    def test_diplays_ticket_kind(self):
         response = self.client.get(
             reverse('ticket_detail', args=[self.ticket.id])
         )
 
-        self.assertIn(self.ticket.status, response.content.decode())
+        self.assertIn(self.ticket.kind, response.content.decode())
 
     def test_can_set_status_on_POST(self):
         self.ticket.status = Ticket.Status.IN_REVIEW

@@ -4,7 +4,7 @@
 
 <form action="{% url 'new-ticket' %}" method="post">
     <label>
-        <select id="id_select">
+        <select id="id_select" name="kind">
             {% for ticket_type in ticket_types %}
                 <option>{{ ticket_type }}</option>
             {% endfor %}

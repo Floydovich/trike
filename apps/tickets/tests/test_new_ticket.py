@@ -9,7 +9,6 @@ class NewTicketTest(TestCase):
     Return the new_ticket template
     Display ticket types on GET
     Redirects to home page after POST
-
     Save the ticket type on POST
     """
 

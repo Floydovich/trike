@@ -27,15 +27,15 @@ Feature: Creating a bug ticket
     Then List shows only one ticket. is displayed in the list
     And the previously created ticket is still in the list
 
-  Scenario Outline: Selection the ticket type
+  Scenario Outline: Selecting the kind of a ticket
     Given the new ticket page is opened
-    When I select the ticket type <ticket_type>
-    And I enter the title Cannot select the ticket type.
+    When I select the ticket kind <kind>
+    And I enter the title Cannot select the ticket kind.
     And I submit the ticket
     Then the home page is opened
-    And the ticket type is <ticket_type>
+    And the ticket kind is <kind>
 
     Examples:
-    | ticket_type |
-    | Bug         |
-    | Feature     |
+    | kind    |
+    | Bug     |
+    | Feature |

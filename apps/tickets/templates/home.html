@@ -11,8 +11,8 @@
 <table id="id_tickets_table">
     {% for ticket in tickets %}
         <tr>
-            <td id="id_typebox">
-                {{ ticket.type }}
+            <td id="id_kind">
+                {{ ticket.kind }}
             </td>
             <td>
                 <a href="{% url 'ticket_detail' ticket.id %}">
