@@ -29,9 +29,10 @@ Feature: Creating a bug ticket
 
   Scenario Outline: Selection the ticket type
     Given the new ticket page is opened
-    When I select to create a <ticket_type>
-    And I press the submit button
-    Then the ticket detail page is opened
+    When I select the ticket type <ticket_type>
+    And I enter the title Cannot select the ticket type.
+    And I submit the ticket
+    Then the home page is opened
     And the ticket type is <ticket_type>
 
     Examples:

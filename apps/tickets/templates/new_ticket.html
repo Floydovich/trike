@@ -2,13 +2,22 @@
 
 <body>
 
-<label>
-    <select id="id_select">
-        {% for ticket_type in ticket_types %}
-            <option>{{ ticket_type }}</option>
-        {% endfor %}
-    </select>
-</label>
+<form action="{% url 'new-ticket' %}" method="post">
+    <label>
+        <select id="id_select">
+            {% for ticket_type in ticket_types %}
+                <option>{{ ticket_type }}</option>
+            {% endfor %}
+        </select>
+
+        <input name="ticket_title">
+        <textarea name="ticket_description"></textarea>
+
+        <input type="submit" name="Submit">
+    </label>
+
+    {% csrf_token %}
+</form>
 
 </body>
 
