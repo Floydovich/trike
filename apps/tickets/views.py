@@ -36,4 +36,6 @@ def ticket_status(request, id):
 
 
 def new_ticket(request):
-    return render(request, 'new_ticket.html')
+    ticket_types = Ticket.Type.values
+
+    return render(request, 'new_ticket.html', {'ticket_types': ticket_types})

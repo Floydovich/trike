@@ -1,0 +1,15 @@
+<html lang="en">
+
+<body>
+
+<label>
+    <select id="id_select">
+        {% for ticket_type in ticket_types %}
+            <option>{{ ticket_type }}</option>
+        {% endfor %}
+    </select>
+</label>
+
+</body>
+
+</html>

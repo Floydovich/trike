@@ -1,14 +1,20 @@
+import time
+
 from behave import *
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
 
 
 @given("the new ticket page is opened")
 def step_impl(context):
-    context.browser.get(f'{context.browser.current_url}/new-ticket')
+    context.browser.get(f'{context.base_url}/new-ticket')
 
 
 @when("I select to create a {ticket_type}")
 def step_impl(context, ticket_type):
-    raise NotImplementedError(u'STEP: When I select to create a <type>')
+    select = Select(context.browser.find_element(By.ID, 'id_select'))
+    select.select_by_visible_text(ticket_type)
+    time.sleep(1)
 
 
 @then("the ticket detail page is opened")

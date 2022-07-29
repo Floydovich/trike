@@ -36,5 +36,5 @@ Feature: Creating a bug ticket
 
     Examples:
     | ticket_type |
-    | bug         |
-    | feature     |
+    | Bug         |
+    | Feature     |
