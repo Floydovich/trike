@@ -10,13 +10,16 @@
 
     <p>{{ ticket.description }}</p>
 
-    <p id="status">{{ ticket.status }}</p>
+    <p id="id_status">{{ ticket.status }}</p>
 
     <form action="{% url 'ticket_status' ticket.id %}" method="post">
-        <button id="PENDING" name="status" type="submit" value="PENDING">PENDING</button>
-        <button id="IN REVIEW" name="status" type="submit" value="IN REVIEW">IN REVIEW</button>
-        <button id="DONE" name="status" type="submit" value="DONE">DONE</button>
-
+        <button id="id_status_switch"
+                type="submit"
+                name="status"
+                value="{{ next_status }}"
+        >
+            Status switch
+        </button>
         {% csrf_token %}
     </form>
 

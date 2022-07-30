@@ -14,7 +14,9 @@ def home_page(request):
 def ticket_detail(request, id):
     ticket = Ticket.objects.get(id=id)
 
-    return render(request, 'ticket_detail.html', {'ticket': ticket})
+    return render(request,
+                  'ticket_detail.html',
+                  {'ticket': ticket, 'next_status': ticket.next_status})
 
 
 def ticket_status(request, id):

@@ -8,13 +8,13 @@ class NewTicketTest(TestCase):
     """
     Uses the new_ticket template
     Displays ticket types on GET
-    Redirects to home page after POST
     Save the ticket type on POST
+    Redirects to home page after POST
     """
 
     url_name = 'new-ticket'
 
-    def setUp(self) -> None:
+    def setUp(self):
         self.data = {
             'kind': 'Bug',
             'title': 'Title for a new ticket',

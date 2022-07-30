@@ -21,8 +21,16 @@ class Ticket(models.Model):
         IN_REVIEW = 'IN REVIEW'
         DONE = 'DONE'
 
+        @classmethod
+        def get_next(cls, status):
+            return cls.values[cls.values.index(status) + 1]
+
     status = models.CharField(
         max_length=10,
         choices=Status.choices,
         default=Status.PENDING,
     )
+
+    @property
+    def next_status(self):
+        return Ticket.Status.get_next(self.status)

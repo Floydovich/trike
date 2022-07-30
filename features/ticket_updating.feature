@@ -4,14 +4,15 @@ Feature: Working on a bug ticket
   I want to read about a bug
   So I can start working to fix it
 
-  Scenario Outline: Changing the ticket status
-    Given the ticket detail page is opened
-    And the ticket status is PENDING
-    When I mark the ticket as <status>
-    Then the ticket status is changed to <status>
+  Scenario Outline: Switching the ticket status
+    Given the ticket status is <current_status>
+    And the ticket detail page is opened
+    When I mark the ticket as <next_status>
+    Then the ticket status is changed to <next_status>
 
     Examples:
-      | status    |
-      | PENDING   |
-      | IN REVIEW |
-      | DONE      |
+      | current_status | next_status |
+      | PENDING        | IN REVIEW   |
+      | IN REVIEW      | CLOSED      |
+
+  # Scenario when the ticket is closed and the user cannot switch status any longer
