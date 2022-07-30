@@ -1,6 +1,7 @@
 import time
 
 from behave import *
+from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 from apps.tickets.models import Ticket
@@ -9,7 +10,7 @@ from apps.tickets.models import Ticket
 STATUSES = {
     'PENDING': Ticket.Status.PENDING,
     'IN REVIEW': Ticket.Status.IN_REVIEW,
-    'CLOSED': Ticket.Status.DONE,
+    'CLOSED': Ticket.Status.CLOSED,
 }
 
 
@@ -18,7 +19,7 @@ def step_impl(context, current_status):
     context.ticket = Ticket.objects.create(status = STATUSES[current_status])
 
 
-@given("the ticket detail page is opened")
+@step("the ticket detail page is opened")
 def step_impl(context):
     context.detail_page_url = f'{context.base_url}/tickets/{context.ticket.id}'
 
@@ -33,8 +34,8 @@ def step_impl(context):
 
 @when("I mark the ticket as {status}")
 def step_impl(context, status):
-    status_button = context.browser.find_element(By.ID, 'id_status_switch')
-    status_button.click()
+    switch = context.browser.find_element(By.ID, 'id_status_switch')
+    switch.click()
     time.sleep(0.5)
 
 

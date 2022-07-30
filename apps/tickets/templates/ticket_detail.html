@@ -12,16 +12,18 @@
 
     <p id="id_status">{{ ticket.status }}</p>
 
-    <form action="{% url 'ticket_status' ticket.id %}" method="post">
-        <button id="id_status_switch"
-                type="submit"
-                name="status"
-                value="{{ next_status }}"
-        >
-            Status switch
-        </button>
-        {% csrf_token %}
-    </form>
+    {% if next_status %}
+        <form action="{% url 'ticket_status' ticket.id %}" method="post">
+            <button id="id_status_switch"
+                    type="submit"
+                    name="status"
+                    value="{{ next_status }}"
+            >
+                Change status
+            </button>
+            {% csrf_token %}
+        </form>
+    {% endif %}
 
 </body>
 

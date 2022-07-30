@@ -14,5 +14,4 @@ Feature: Working on a bug ticket
       | current_status | next_status |
       | PENDING        | IN REVIEW   |
       | IN REVIEW      | CLOSED      |
-
-  # Scenario when the ticket is closed and the user cannot switch status any longer
+      | CLOSED         | PENDING     |

@@ -1,24 +1,23 @@
 # Created by Ilyas at 7/28/2022
-Feature: Ticket list and ticket selection
+Feature: Ticket list and selection
 
-  Scenario: Opening the home page
-    Given the browser is opened
-    When I move to the home page
-    Then the browser title is "trike"
-    And the page heading says "List of bugs"
-
-  Scenario Outline: View a ticket detail
+  Scenario: View the ticket list
     Given the list contains two created tickets
-      | title                      | description                   |
-      | Can't open ticket detail   | Bug description               |
-      | Can't edit the description | Outdated ticket's description |
+      | kind    | title                       | description         |
+      | Bug     | Can't open ticket detail    | Bug description     |
+      | Feature | Edit the ticket description | Feature description |
+    When the home page is opened
+    Then the ticket kinds are in the list
+    And the ticket titles are in the list
+    And the ticket statuses are in the list
 
-    When I click on the ticket with the title <title>
-    Then the browser opens the ticket <id> detail page
-    And the page contains the title <title>
-    And the page contains the description <description>
-
-    Examples:
-      | id | title                      | description                   |
-      | 1  | Can't open ticket detail   | Bug description               |
-      | 4  | Can't edit the description | Outdated ticket's description |
+#  Scenario Outline: View a ticket detail
+#    When I click on the ticket with the title <title>
+#    Then the browser opens the ticket detail page
+#    And the page contains the title <title>
+#    And the page contains the description <description>
+#
+#    Examples:
+#      | title                      | description                   |
+#      | Can't open ticket detail   | Bug description               |
+#      | Can't edit the description | Outdated ticket's description |

@@ -44,6 +44,7 @@ class TicketDetailsTest(TestCase):
         self.assertIn(self.ticket.status, response.content.decode())
 
     def test_displays_next_status(self):
+        # TODO: Refactor to avoid duplication
         next_status = self.ticket.next_status
 
         response = self.client.get(
@@ -61,7 +62,18 @@ class TicketDetailsTest(TestCase):
             reverse('ticket_detail', args=[self.ticket.id])
         )
 
-        self.assertEqual('DONE', next_status)
+        self.assertEqual('CLOSED', next_status)
+        self.assertIn(next_status, response.content.decode())
+
+        self.ticket.status = Ticket.Status.CLOSED
+        self.ticket.save()
+        next_status = self.ticket.next_status
+
+        response = self.client.get(
+            reverse('ticket_detail', args=[self.ticket.id])
+        )
+
+        self.assertEqual('PENDING', next_status)
         self.assertIn(next_status, response.content.decode())
 
     def test_can_set_status_on_POST(self):
@@ -90,7 +102,7 @@ class TicketDetailsTest(TestCase):
     def test_redirect_to_detail_after_status_POST(self):
         response = self.client.post(
             reverse('ticket_status', args=[self.ticket.id]),
-            data={'status': 'DONE'}
+            data={'status': 'CLOSED'}
         )
 
         self.assertEqual(302, response.status_code)

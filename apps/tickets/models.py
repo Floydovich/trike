@@ -19,11 +19,14 @@ class Ticket(models.Model):
     class Status(models.TextChoices):
         PENDING = 'PENDING'
         IN_REVIEW = 'IN REVIEW'
-        DONE = 'DONE'
+        CLOSED = 'CLOSED'
 
         @classmethod
         def get_next(cls, status):
-            return cls.values[cls.values.index(status) + 1]
+            try:
+                return cls.values[cls.values.index(status) + 1]
+            except IndexError:
+                return cls.PENDING
 
     status = models.CharField(
         max_length=10,
