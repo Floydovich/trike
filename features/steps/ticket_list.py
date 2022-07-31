@@ -1,10 +1,11 @@
 from behave import *
+from selenium.webdriver.common.by import By
 
 from apps.tickets.models import Ticket
 from helpers import wait_for_cell_in_tickets_table
 
 
-@given("the list contains two created tickets")
+@given("there are two created tickets")
 def step_impl(context):
     context.tickets = []
     for row in context.table:
@@ -16,9 +17,27 @@ def step_impl(context):
         context.tickets.append(ticket)
 
 
-@when("the home page is opened")
+@given("there is a created ticket")
+def step_impl(context):
+    context.ticket = Ticket.objects.create(title='A ticket title', kind='Bug')
+
+
+@step("the home page is opened")
 def step_impl(context):
     context.browser.get(context.base_url)
+
+
+@when("I select a ticket from the list")
+def step_impl(context):
+    link = context.browser.find_element(By.TAG_NAME, 'a')
+    link.click()
+
+
+@then("the browser opens the ticket detail")
+def step_impl(context):
+    expected_url = context.base_url + f'/tickets/{context.ticket.id}'
+
+    context.test.assertEqual(expected_url, context.browser.current_url)
 
 
 @then("the ticket kinds are in the list")
