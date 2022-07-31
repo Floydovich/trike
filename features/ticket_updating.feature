@@ -9,16 +9,17 @@ Feature: Updating a bug ticket
 
     Given the <kind> ticket with <title> and <description> is createad
     When the ticket detail page is opened
-    Then the page contains the title <title>
+    Then the page contains the kind <kind>
+    And the page contains the title <title>
     And the page contains the description <description>
 
     Examples:
-      | kind    | title       | description           |
-      | Bug     | Bad bug     | A bug description     |
-      | Feature | New feature | A feature description |
+      | kind    | title  | description     |
+      | Bug     | First  | This is awful   |
+      | Feature | Second | This is awesome |
 
 
-  Scenario Outline: Switching the ticket status
+  Scenario Outline: Changing the ticket status
 
     Given the ticket status is <current_status>
     And the ticket detail page is opened

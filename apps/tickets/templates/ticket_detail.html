@@ -6,24 +6,24 @@
 
 <body>
 
-    <h1>{{ ticket.title }}</h1>
+    <h1 id="id_title">{{ ticket.title }}</h1>
 
-    <p>{{ ticket.description }}</p>
+    <p id="id_kind">{{ ticket.kind }}</p>
+
+    <p id="id_description">{{ ticket.description }}</p>
 
     <p id="id_status">{{ ticket.status }}</p>
 
-    {% if next_status %}
-        <form action="{% url 'ticket_status' ticket.id %}" method="post">
-            <button id="id_status_switch"
-                    type="submit"
-                    name="status"
-                    value="{{ next_status }}"
-            >
-                Change status
-            </button>
-            {% csrf_token %}
-        </form>
-    {% endif %}
+    <form action="{% url 'ticket_status' ticket.id %}" method="post">
+        <button id="id_status_switch"
+                type="submit"
+                name="status"
+                value="{{ next_status }}"
+        >
+            Change status
+        </button>
+        {% csrf_token %}
+    </form>
 
 </body>
 

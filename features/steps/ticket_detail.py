@@ -1,4 +1,5 @@
 from behave import *
+from selenium.webdriver.common.by import By
 
 from apps.tickets.models import Ticket
 
@@ -12,11 +13,19 @@ def step_impl(context, kind, title, description):
     )
 
 
+@then("the page contains the kind {kind}")
+def step_impl(context, kind):
+    element = context.browser.find_element(By.ID, 'id_kind')
+    context.test.assertEqual(kind, element.text)
+
+
 @then("the page contains the title {title}")
 def step_impl(context, title):
-    context.test.assertIn(title, context.browser.page_source)
+    element = context.browser.find_element(By.ID, 'id_title')
+    context.test.assertEqual(title, element.text)
 
 
 @then("the page contains the description {description}")
 def step_impl(context, description):
-    context.test.assertIn(description, context.browser.page_source)
+    element = context.browser.find_element(By.ID, 'id_description')
+    context.test.assertEqual(description, element.text)
