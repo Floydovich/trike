@@ -1,16 +1,15 @@
 from behave import *
-from selenium.webdriver.common.by import By
+
+from apps.tickets.models import Ticket
 
 
-@when("I click on the ticket with the title {title}")
-def step_impl(context, title):
-    ticket_title = context.browser.find_element(By.LINK_TEXT, title)
-    ticket_title.click()
-
-
-@then("the browser opens the ticket detail page")
-def step_impl(context):
-    context.test.assertIn(f'tickets/{id}', context.browser.current_url)
+@given("the {kind} ticket with {title} and {description} is createad")
+def step_impl(context, kind, title, description):
+    context.ticket = Ticket.objects.create(
+        kind=kind,
+        title=title,
+        description=description,
+    )
 
 
 @then("the page contains the title {title}")

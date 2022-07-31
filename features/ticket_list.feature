@@ -16,14 +16,3 @@ Feature: Ticket list and selection
     And the home page is opened
     When I select a ticket from the list
     Then the browser opens the ticket detail
-
-#  Scenario Outline: View a ticket detail
-#    When I click on the ticket with the title <title>
-#    Then the browser opens the ticket detail page
-#    And the page contains the title <title>
-#    And the page contains the description <description>
-#
-#    Examples:
-#      | title                      | description                   |
-#      | Can't open ticket detail   | Bug description               |
-#      | Can't edit the description | Outdated ticket's description |

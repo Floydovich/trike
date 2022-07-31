@@ -1,7 +1,6 @@
 import time
 
 from behave import *
-from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 from apps.tickets.models import Ticket

@@ -1,8 +1,8 @@
 # Created by Ilyas at 7/21/2022
-Feature: Creating a bug ticket
+Feature: Creating a new ticket
   As a developer,
   I want to be able create a bug report,
-  So I can save it and fix the bug later.
+  So I can save it to review later.
 
   Scenario Outline: Submitting a new ticket
     Given the new ticket form is opened
