@@ -24,7 +24,7 @@ def step_impl(context):
 
 @step("the home page is opened")
 def step_impl(context):
-    context.browser.get(context.base_url)
+    context.browser.get(context.base_url, )
 
 
 @when("I select a ticket from the list")

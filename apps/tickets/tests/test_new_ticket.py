@@ -22,14 +22,14 @@ class NewTicketTest(TestCase):
         }
 
     def test_renders_correct_template(self):
-        response = self.client.get(reverse(self.url_name))
+        response = self.client.get(reverse(self.url_name), )
 
         # IMPORTANT: don't change the order of arguments in assertTemplateUsed.
         # It only works when response is the first.
         self.assertTemplateUsed(response, 'new_ticket.html')
 
     def test_display_ticket_types_on_GET(self):
-        response = self.client.get(reverse(self.url_name))
+        response = self.client.get(reverse(self.url_name), )
 
         self.assertIn(Ticket.Kind.BUG, response.content.decode())
         self.assertIn(Ticket.Kind.FEATURE, response.content.decode())

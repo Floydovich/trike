@@ -13,7 +13,7 @@ STATUSES = {
 }
 
 
-@given("the ticket status is {current_status}")
+@given("the ticket with {current_status} status is created")
 def step_impl(context, current_status):
     context.ticket = Ticket.objects.create(status = STATUSES[current_status])
 
@@ -22,10 +22,11 @@ def step_impl(context, current_status):
 def step_impl(context):
     context.detail_page_url = f'{context.base_url}/tickets/{context.ticket.id}'
 
-    context.browser.get(context.detail_page_url)
+    context.browser.get(context.detail_page_url, )
 
-    context.test.assertEqual(context.detail_page_url, context.browser.current_url)
 
+@given("the status on the page is {current_status}")
+def step_impl(context, current_status):
     statusbox = context.browser.find_element(By.ID, 'id_status')
 
     context.test.assertEqual(context.ticket.status, statusbox.text)

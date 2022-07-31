@@ -6,7 +6,6 @@ Feature: Updating a bug ticket
 
 
   Scenario Outline: Viewing a ticket detail
-
     Given the <kind> ticket with <title> and <description> is createad
     When the ticket detail page is opened
     Then the page contains the kind <kind>
@@ -20,9 +19,9 @@ Feature: Updating a bug ticket
 
 
   Scenario Outline: Changing the ticket status
-
-    Given the ticket status is <current_status>
+    Given the ticket with <current_status> status is created
     And the ticket detail page is opened
+    And the status on the page is <current_status>
     When I mark the ticket as <next_status>
     Then the ticket status is changed to <next_status>
 

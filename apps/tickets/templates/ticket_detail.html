@@ -14,7 +14,7 @@
 
     <p id="id_status">{{ ticket.status }}</p>
 
-    <form action="{% url 'ticket_status' ticket.id %}" method="post">
+    <form action="{% url 'ticket-status' ticket.id %}" method="post">
         <button id="id_status_switch"
                 type="submit"
                 name="status"

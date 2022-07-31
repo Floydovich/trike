@@ -10,7 +10,7 @@ from features.steps.helpers import *
 
 @given("the new ticket form is opened")
 def step_impl(context):
-    context.browser.get(f'{context.base_url}/new-ticket')
+    context.browser.get(f'{context.base_url}/new-ticket', )
 
 
 @when("I select the kind {kind}")

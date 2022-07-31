@@ -3,10 +3,10 @@ from django.test import TestCase
 from apps.tickets.models import Ticket
 
 
-class HomePage(TestCase):
+class HomePageTest(TestCase):
 
     def test_home_page_returns_correct_template(self):
-        response = self.client.get('/')
+        response = self.client.get('/', )
 
         # IMPORTANT: don't change the order of arguments in assertTemplateUsed.
         # It only works when response is the first.
@@ -30,7 +30,7 @@ class HomePage(TestCase):
                 kind=ticket['kind'],
             )
 
-        response = self.client.get('/')
+        response = self.client.get('/', )
 
         for ticket in tickets:
             for value in ticket.values():
