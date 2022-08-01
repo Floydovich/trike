@@ -6,9 +6,23 @@ from apps.tickets.models import Ticket
 from features.steps.helpers import *
 
 
-# Scenario: Submitting a new ticket
+# Moving from the home page
 
-@given("the new ticket form is opened")
+@when("I go the new ticket form")
+def step_impl(context):
+    element = context.browser.find_element(By.ID, 'id_new_ticket')
+    element.click()
+
+
+@then("the ticket form is opened")
+def step_impl(context):
+    context.test.assertEqual(f'{context.base_url}/new-ticket',
+                             context.browser.current_url)
+
+
+# Submitting a new ticket
+
+@given("the ticket form is opened")
 def step_impl(context):
     context.browser.get(f'{context.base_url}/new-ticket', )
 

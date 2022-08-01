@@ -8,6 +8,10 @@
 
 <h1>List of bugs and features</h1>
 
+<a id="id_new_ticket" href="{% url 'new-ticket' %}">
+    <button>Create a new ticket</button>
+</a>
+
 <table id="id_tickets_table">
     {% for ticket in tickets %}
         <tr>
