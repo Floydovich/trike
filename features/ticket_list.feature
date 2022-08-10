@@ -2,8 +2,7 @@
 Feature: Ticket list and selection
   As a developer
   I want to be able to view ticket list
-  So I can see how many tickets there are,
-    what kind are they and choose a ticket to work on
+  So I can choose a ticket to work on
 
   Scenario: View the ticket list
     Given there are two created tickets

@@ -29,7 +29,7 @@ def step_impl(context):
 
 @when("I pick a ticket from the list")
 def step_impl(context):
-    link = context.browser.find_element(By.TAG_NAME, 'a')
+    link = context.browser.find_element(By.LINK_TEXT, context.ticket.title)
     link.click()
 
 

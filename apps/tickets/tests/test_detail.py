@@ -38,36 +38,17 @@ class TicketDetailsTest(TestCase):
         self.assertIn(self.ticket.status, response.content.decode())
 
     def test_displays_next_status(self):
-        # TODO: Refactor to avoid duplication
-        next_status = self.ticket.next_status
+        expected_next_status = Ticket.Status.IN_REVIEW
 
         response = self.client.get(reverse('ticket-detail', args=[self.ticket.id]), )
 
-        self.assertEqual('IN REVIEW', next_status)
-        self.assertIn(next_status, response.content.decode())
-
-        self.ticket.status = Ticket.Status.IN_REVIEW
-        self.ticket.save()
-        next_status = self.ticket.next_status
-
-        response = self.client.get(reverse('ticket-detail', args=[self.ticket.id]), )
-
-        self.assertEqual('CLOSED', next_status)
-        self.assertIn(next_status, response.content.decode())
-
-        self.ticket.status = Ticket.Status.CLOSED
-        self.ticket.save()
-        next_status = self.ticket.next_status
-
-        response = self.client.get(reverse('ticket-detail', args=[self.ticket.id]), )
-
-        self.assertEqual('PENDING', next_status)
-        self.assertIn(next_status, response.content.decode())
+        self.assertEqual(expected_next_status, self.ticket.next_status)
+        self.assertIn(expected_next_status, response.content.decode())
 
     def test_can_set_status_on_POST(self):
         expected_status = 'IN REVIEW'
 
-        response = self.client.post(
+        self.client.post(
             reverse('ticket-status', args=[self.ticket.id]),
             data={'status': expected_status}
         )
